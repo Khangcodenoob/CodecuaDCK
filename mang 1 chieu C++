@@ -1,0 +1,736 @@
+// SingleArray.h : Include file for standard system include files,
+// or project specific include files.
+////TOXIC code noob 
+#pragma once
+#include <iostream>
+#include <Windows.h> // thư viện gọi SetConsoleOutputCP(65001); // hiển thị tiếng Việt có dấu
+#include <conio.h>
+
+//#pragma execution_character_set( "utf-8" )  // xử lý hiển thị tiếng Việt có dấu save as - Save with Encoding... UTF-8
+using namespace std;
+
+
+//Bài 1. Nhập mảng 
+void NhapMang(int m[], int& n)
+{
+	int a, i = 0;
+	do
+	{
+		cout << "\n\t Nhap so phan tu cua mang: ";
+		cin >> n;
+		// Nhập số <= 0 --> Phải nhập lại
+	} while (n <= 0);
+
+	while (i < n)
+	{
+		cout << "\t m[" << i << "] = ";
+		cin >> a;
+		m[i] = a;
+		i++;
+	}
+}
+//Bài 20. Nhập mảng tự động
+void AutoArray(int m[], int range_min, int range_max, int& n)
+{
+	do
+	{
+		cout << "\n\t Nhap so phan tu cua mang: ";
+		cin >> n;
+		// luôn luôn nhập số dương
+	} while (n <= 0);
+
+	// range_min <= random number < range_max  
+	// Create the random object
+	int u, i = 0;
+	while (i < n)
+	{
+		u = (double)rand() / (RAND_MAX + 1) * (range_max - range_min + 1) + range_min;
+		m[i] = u;
+		i++;
+	}
+}
+
+//Bài 2. Xuất mảng 
+void XuatMang(int a[], int n)
+{
+	cout << "\n Xuat mang: ";
+	for (int i = 0; i < n; i++)
+	{
+		cout << a[i] << "   "; // 3 khoảng trống
+	}
+}
+
+
+// Bài 3. Tính trung bình cộng các số Lẻ ở vị trí Chẵn
+double TBCSoLeViTriChan(int a[], int n)
+{
+	double Tong = 0;
+	int dem = 0;
+	// Cách 1: sử dụng if có 2 điều kiện đồng thời
+	for (int i = 0; i < n; i++)
+	{
+		// Kiểm tra số lẻ a[i]%2!=0; vị trí chẵn i%2==0
+		if ((a[i] % 2 != 0) && (i % 2 == 0))
+		{
+			Tong += a[i];
+			dem++;
+		}
+	}
+	//// Cách 2: chạy hiệu quả hơn vòng lặp for luôn chạy vị trí chẵn 0,2,4....
+	//for (int i=0; i<n; i += 2)
+	//{
+	//	if (a[i]%2 != 0) // kiểm tra số lẻ
+	//  {
+	//		Tong += a[i];
+	//		dem++;
+	//  }
+	//}
+	if (dem > 0)
+		return Tong / dem;
+	else
+		return 0;
+}
+
+// 4. Tìm phần tử có giá trị x trong mảng
+int TimX(int a[], int n, int x)
+{
+	for (int i = 0; i < n; i++)
+		if (a[i] == x)
+			return i;
+	return -1;
+}
+
+// 5. Tìm vị trí số lớn nhất
+int TimViTriMax(int a[], int n)
+{
+	int max = a[0];  // max = phần tử đầu tiên
+	int vitri = 0;   // Vitri đầu tiên
+	for (int i = 1; i < n; i++)
+	{
+		if (a[i] > max)
+		{
+			max = a[i];
+			vitri = i;
+		}
+	}
+	return vitri;
+}
+
+
+// Viết thêm một hàm phụ tìm Min hỗ trợ cho Bài 6 gọi
+int TimMin(int a[], int n)
+{
+	int min = a[0];  // min = phần tử đầu tiên	
+	for (int i = 1; i < n; i++)
+	{
+		if (a[i] < min)
+		{
+			min = a[i];
+		}
+	}
+	return min;
+}
+// 6. Tìm CÁC vị trí số nhỏ nhất - Goi hàm TimMin trước để có M
+int TimCacViTriMin(int a[], int n, int M, int b[])
+{
+	// Tham số M là số min; có thể tìm CASC vị trí 1 số bất kỳ có trong mảng
+	// tham số mảng b[] lưu các vị trí tìM được
+	// dem là đếm số phần tử tìm thấy để return
+	int dem = 0;
+	for (int i = 0; i < n; i++)
+	{
+		if (M == a[i])
+		{
+			b[dem] = i;  // Gán vị  trí tìm thấy vào mảng b[]
+			dem++;		// Tăng biến đếm lên sau khi gán
+		}
+	}
+	return dem;
+}
+
+// Kiểm tra SỐ CHÍNH PHƯƠNG
+bool LaSCP(int n)
+{
+	int can2 = (int)sqrt(n);
+	if (can2 * can2 == n)
+		return true;
+	else
+		return false;
+}
+
+// 7. Đếm số chính phương";
+int DemSoChinhPhuong(int a[], int n)
+{
+	int dem = 0;
+	for (int i = 0; i < n; i++)
+	{
+		if (LaSCP(a[i]))
+			dem++;
+	}
+	return dem;
+}
+
+// Kiểm tra SỐ NGUYÊN TỐ
+bool LaSNT(int n)
+{
+	n = abs(n);
+	for (int i = 2; i < n; i++)
+	{
+		if (n % i == 0)
+			return 0;
+	}
+	return 1;
+}
+
+// 8. Xuất các số nguyên tố lên màn hình";
+void XuatSoNguyenTo(int a[], int n)
+{
+	int dem = 0;
+	for (int i = 0; i < n; i++)
+	{
+		if (LaSNT(a[i]))
+		{
+			dem++;
+			if (dem == 1)
+			{
+				// chỉ xuất dòng này 1 lần
+				cout << "\n\t Cac So Nguyen To cua mang la: ";
+			}
+			cout << a[i] << "\t"; // Tab
+		}
+	}
+	if (dem == 0)
+	{
+		cout << "\n\t Mang khong co So Nguyen To nao...!";
+	}
+	cout << "\n";
+}
+
+// 9. Thay thế các phần tử âm có trong mảng bằng giá trị 0
+int ThaySoAm(int a[], int n)
+{
+	int dem = 0;
+	for (int i = 0; i < n; i++)
+	{
+		if (a[i] < 0)
+		{
+			a[i] = 0;
+			dem++;
+		}
+	}
+	return dem;
+}
+
+// 10. Tính Tổng, Tích và Giá trị trung bình của một mảng";
+double TrungBinhCongTongTich(int a[], int n, int& Tong, int& Tich)
+{
+	Tong = 0;
+	Tich = 1;
+	for (int i = 0; i < n; ++i)
+	{
+		Tong += a[i];
+		if (a[i] != 0)
+			Tich *= a[i];
+	}
+	return (Tong * 1.0) / n;
+}
+
+// Hàm hỗ trợ hàm sort
+void HoanVi(int& a, int& b)
+{
+	int t = a;
+	a = b;
+	b = t;
+}
+
+// 11. Sắp xếp mảng đã nhập theo thứ tự tăng dần";
+void Sort(int a[], int n)
+{
+	// Trường hợp mảng nhiều phần tử.
+	if (n > 30000)
+	{
+		cout << "\n Please wait a second! System is Sorting.... n = " << n;
+	}
+
+	for (int i = 0; i < n - 1; i++)
+	{
+		for (int j = i + 1; j < n; j++)
+		{
+			if (a[i] > a[j])
+				HoanVi(a[i], a[j]);
+		}
+	}
+}
+
+
+// 12. Tìm phần tử có tần suất xuất hiện nhiều nhất và số lần xuất hiện";  // CACH 1
+int TimSoLanXuatHien(int a[], int n, int& GiaTri)
+{
+	int dem = 1; // không có số trùng nhau thì dem = 1
+	int Max = 1; // Số lần xuất hiện nhiều nhất 
+	GiaTri = a[0]; // Bằng giá trị phần tử đầu tiên của mảng
+
+	// Gọi Sort để sắp xếp trước khi thực hiện thì ta có các dãy con là các số = nhau sẽ đứng liên tiếp nhau.
+	Sort(a, n);
+
+	// phần trử trước so sánh với phần tử sau nên dùng (n-1) ở lần so sánh cuối mảng
+	for (int i = 0; i < n - 1; i++)
+	{
+		if (a[i] == a[i + 1])
+		{
+			dem++;
+		}
+		else
+		{
+			if (dem > Max)
+			{
+				Max = dem;
+				GiaTri = a[i]; // gán giá trị phần tử 
+			}
+			// reset biến đếm = 1 để đếm dãy con khác
+			dem = 1;
+		}
+	}
+	return Max;
+}
+
+// 12. Tìm phần tử có tần suất xuất hiện nhiều nhất và số lần xuất hiện"; // CÁCH 2 xử lý theo vong lặp while
+int TimSoLanXuatHienC2(int a[], int n, int& GiaTri)
+{
+	int dem = 1; // không có số trùng nhau thì dem = 1
+	int Max = 1; // Số lần xuất hiện
+	GiaTri = a[0]; // Bằng giá trị phần tử đầu tiên của mảng
+
+	// Gọi Sort Sắp xếp tăng dần trước khi thực hiện thì ta có các dãy con là các số = nhau sẽ đứng liên tiếp nhau.
+	Sort(a, n);
+
+	// phần trử trước so sánh với phần tử sau nên dùng (n-1) ở lần so sánh cuối mảng
+	for (int i = 0; i < n - 1; i++)
+	{
+		// tăng biến đếm khi dãy con còn bằng nhau		
+		while ((a[i] == a[i + 1]) && (i < n - 1))
+		{
+			dem++;
+			i++;
+		}
+
+		if (dem > Max)
+		{
+			Max = dem;
+			GiaTri = a[i]; // gán giá trị phần tử xuất hiện nhiều nhất
+		}
+		// reset biến đếm = 1 để đếm dãy con khác
+		dem = 1;
+	}
+	return Max;
+}
+
+// 13. Thêm phần tử vào mảng tại vị trí biết trước
+bool Them1PhanTu(int a[], int& n, int x, int vt)
+{
+	// x là giá trị cần thêm
+	// vị trí cần thêm phải thuộc mảng n phần tử
+	if (vt >= 0 && vt <= n)
+	{
+		//Thêm vào cuối mảng
+		if (vt == n)
+			a[n] = x;
+		else
+		{
+			// Dồn mảng về phía sau (sang phải) dừng lại trước vị trí cần thêm
+			for (int i = n; i > vt; i--)
+				a[i] = a[i - 1];
+
+			// gán giá trị sau khi dồn
+			a[vt] = x;
+		}
+		// Tăng số phần tử trong mảng sau khi thêm
+		n++;
+		return true;
+	}
+	return false;
+}
+
+//14. Xóa 1 phần tử biết trước vị trí  
+bool Xoa1PhanTu(int a[], int& n, int vt)
+{
+	if (vt >= 0 && vt < n) // vị trí cần xoá phải thuộc mảng n phần tử
+	{
+		// Dồn mảng lên trước (sang trái) tại vị trí cần xoá
+		for (int i = vt; i < n - 1; i++)
+			a[i] = a[i + 1];
+
+		// Giảm số phần tử trong mảng sau khi xóa		
+		n--;
+		return true;
+	}
+	return false;
+}
+
+// 15.  Xóa All các số Âm trong mảng 
+int XoaSoAm(int a[], int& n)
+{
+	int dem = 0; // Đếm số phần tử đã xóa
+	int i = n - 1; // THÔNG THƯỜNG Xóa từ cuối mảng lên trên
+	while (i >= 0)
+	{
+		if (a[i] < 0)
+		{
+			// Gọi oá 1 phần tử tại vị trí biết trước Bài 15.
+			Xoa1PhanTu(a, n, i);
+			dem++;
+		}
+		i--;
+	}
+	return dem;
+}
+
+// 16. Sửa 1 phần tử  của mảng tại vị trí biết trước
+bool Sua1PhanTu(int a[], int n, int x, int vt)
+{
+	// x là giá trị mới cần sửa
+	// vị trí cần sửa phải thuộc mảng n phần tử
+	if (vt >= 0 && vt < n)
+	{
+		// Giá trị mới
+		a[vt] = x;
+		return true;
+	}
+	return false;
+}
+
+// 17. Gộp 2 mảng a và mảng b thành mảng c
+void GopMang(int a[], int na, int b[], int nb, int c[], int& nc)
+{
+	nc = 0;
+	// Copy: Gán giá trị mảng a cho mảng c
+	for (int i = 0; i < na; i++)
+	{
+		// 2 dòng lệnh dưới tương đương 1 dòng --> c[nc++] = a[i]; 
+		c[nc] = a[i];
+		nc++;
+	}
+	// Copy: Gán giá trị mảng b cho mảng c từ vị trí nc tiếp theo
+	for (int i = 0; i < nb; i++)
+	{
+		// 2 dòng lệnh dưới tương đương 1 dòng --> c[nc++] = b[i]; 
+		c[nc] = b[i];
+		nc++;
+	}
+}
+
+// 18. Tách mảng a thành 2 mảng b (chứa các số nguyên dương) và c (chứa các số còn lại)
+void TachMangDuongAm(int a[], int na, int b[], int& nb, int c[], int& nc)
+{
+	nb = 0;
+	nc = 0;
+	for (int i = 0; i < na; i++)
+	{
+		// Số dương vào mảng b
+		if ((a[i]) > 0)
+		{
+			b[nb] = a[i];
+			nb++;
+		}
+		else // Số còn lại vào mảng c
+		{
+			c[nc] = a[i];
+			nc++;
+		}
+	}
+}
+
+// Choose Ascending or Descending from the drop - down list.
+// Sắp xếp mảng theo thứ tự Giảm dần (Descending)
+void SortDesc(int a[], int n)
+{
+	// Trường hợp mảng nhiều phần tử.
+	if (n > 30000)
+	{
+		cout << "\n Please wait a second! System is Sorting.... n = " << n;
+	}
+
+	for (int i = 0; i < n - 1; i++)
+	{
+		for (int j = i + 1; j < n; j++)
+		{
+			if (a[i] < a[j])
+				HoanVi(a[i], a[j]);
+		}
+	}
+}
+
+// Tìm vị trí số Âm đầu tiên xuất hiện trong mảng
+int TimSoAmDauTien(int a[], int n)
+{
+	int i = 0;
+	while (i < n && a[i] >= 0)
+		i++;
+
+	if (i == n)
+		return -1; // không có số âm nào
+	else
+		return i;
+}
+
+// Tìm vị trí số 0 đầu tiên xuất hiện trong mảng
+int TimSo0DauTien(int a[], int n)
+{
+	int i = 0;
+	while (i < n && a[i] != 0)
+		i++;
+
+	if (i == n)
+		return -1; // không có số 0 nào
+	else
+		return i;
+}
+
+// Sort Tăng dần bắt đầu Sort từ  vị trí (vt) biết trước Sort Start Index 
+void SortStartIndex(int a[], int n, int vt)
+{
+	// Trường hợp mảng nhiều phần tử.
+	if (n > 30000)
+	{
+		cout << "\n Please wait a second! System is Sorting.... n = " << n;
+	}
+
+	for (int i = vt; i < n - 1; i++)
+	{
+		for (int j = i + 1; j < n; j++)
+		{
+			if (a[i] > a[j])
+				HoanVi(a[i], a[j]);
+		}
+	}
+}
+
+//19. Sắp xếp mảng sao cho các số DƯƠNG đứng đầu mảng GIẢM DẦN, kế đến là các số ÂM TĂNG DẦN, cuối cùng là các số 0
+void SortDuongAmKhong(int a[], int n)
+{
+	// Sort giảm dần --> Số Dương đầu mảng --> Số 0 -- số Âm
+	SortDesc(a, n);
+
+	// Lưu Vị trí số 0 đầu tiên sau khi Mảng Sort giảm dần
+	int vitri = TimSo0DauTien(a, n);
+	if (vitri != -1)
+	{
+		SortStartIndex(a, n, vitri);
+	}
+	else
+	{
+		// Trường hợp KHÔNG có số 0 nào
+		// Nhận vị trí số Âm đầu tiên sau khi Mảng Sort giảm dần
+		vitri = TimSoAmDauTien(a, n);
+		SortStartIndex(a, n, vitri);
+	}
+}
+//#include "SingleArray.h" // Các hàm v? m?ng 
+
+#define range_min 100		// Min s? ph?n t? phát sinh ng?u nhiên nh? nh?t AutoArray
+#define range_max 200		// Max s? ph?n t? phát sinh ng?u nhiên l?n nh?t AutoArray
+#define MAX 300 // S? ph?n t? t?i ða c?a m?ng
+
+
+//main                                     //////-------------------///////////////---------------------//////
+
+int main()
+{
+	// #include <Windows.h> // x? l? hi?n th? ti?ng Vi?t có d?u
+
+	SetConsoleOutputCP(65001);
+	int chon;
+	int n = 0; // So phan tu cua mang thuc te sau  khi nhap tu ban phim
+	int a[MAX]; // KHOI TAO so phan tu cua mang trong bo nho RAM		
+	int b[MAX];
+	int c[MAX];
+	char ch = 0;
+
+	// vong lap do...while dung de thuc thi su tiep tuc cua chuong trinh
+	do
+	{
+		system("CLS"); // xoa man hinh Clear Screen
+		cout << "\n1.Nhap Mang .";
+		cout << "\n2.Xuat Mang .";
+		cout << "\n3 Tim kiem mot phan tu trong mang.";
+		cout << "\n4 Tim kiem phan tu x trong mang .";
+		cout << "\n5. Tim vi tri so lon nhat trong mang";
+		cout << "\n6. Tim vi tri cac so nho nhat trong mang";
+		cout << "\n7. Đem cac so chinh phuong co trong mang";
+		cout << "\n8. Hien thi cac so nguyen to co trong mang len man hinh";
+		cout << "\n9. Thay the cac phan tu am co trong mang bang gia tri 0";
+		cout << "\n10. Xoa cac phan tu am co trong mang";
+		cout << "\n11. Tinh tong, tich va gia tri trung binh cua mot mang.";
+		cout << "\n12. Sap xep mang đa nhap theo thu tu tang dan.";
+		cout << "\n13. Tim phan tu co so lan xuat hien nhieu nhat.";
+		cout << "\n14. Them phan tu cua mang tai vi tri biet truoc cua mang.";
+		cout << "\n15. Xoa phan tu cua mang tai vi tri biet truoc cua mang.";
+		cout << "\n16. Sua phan tu cua mang tai vi tri biet truoc voi gia tri moi.";
+		cout << "\n17. Gop 2 mang a va mang b thanh mang c.";
+		cout << "\n18. Tach mang a thanh 2 mang b (chua cac so nguyen duong) va c (chua cac so con lai).";
+		cout << "\n19. Sap xep mang sao cho cac so duong dung dau mang giam dan, ke den la cac so am tang dan, cuoi cung la cac so 0.";
+		cout << "\n20. Khoi tao mang n phan tu voi gia ngau nhien duoc phat sinh tu dong.";
+		cout << "\n\t Nhap mot so trong khoang tu 1 - 20 de chay chuong trinh ";
+		cin >> chon;
+		switch (chon)
+		{
+		case 1:
+			NhapMang(a, n);
+			break;
+		case 2:
+			XuatMang(a, n);
+			break;
+		case 3:
+		{
+			double tbc = TBCSoLeViTriChan(a, n);
+			cout << "\n\t Trung binh cong cac so le o vi tri chan: " << tbc << endl;
+			break;
+		}
+		case 4:
+		{
+			int x;
+			cout << "\n\t Nhap so can tim: ";  cin >> x;
+			int vt = TimX(a, n, x);
+			if (vt >= 0)
+				cout << "\t Phan tu Tim Thay tai vi tri: " << vt << endl;
+			else
+				cout << "\t Phan tu can tim khong co trong mang \n";
+			break;
+		}
+		case 5:
+		{
+			int vt = TimViTriMax(a, n);
+			cout << "\t So lon nhat la: " << a[vt] << ", tai vi tri : " << vt << endl;
+			break;
+		}
+		case 6:
+		{
+			int min = TimMin(a, n);
+			int dem = TimCacViTriMin(a, n, min, b);
+			cout << "\n\t So nho nhat = " << min;
+			cout << "\n\t Cac vi tri cua chung la: ";
+			for (int i = 0; i < dem; i++)
+				cout << b[i] << "  ";
+			break;
+		}
+		case 7:
+			cout << "\n\t So Chinh phuong có trong mang la: " << DemSoChinhPhuong(a, n) << endl;
+			break;
+		case 8:
+			XuatSoNguyenTo(a, n);
+			break;
+		case 9:
+			ThaySoAm(a, n);
+			XuatMang(a, n);
+			break;
+		case 10:
+		{
+			int Tong, Tich;
+			double TBC = TrungBinhCongTongTich(a, n, Tong, Tich);
+			cout << "\n\t Tong gia tri cac phan tu = " << Tong;
+			cout << "\n\t Tich gia tri cac phan tu = " << Tich;
+			cout << "\n\t Trung binh cong cac phan tu = " << TBC;
+			break;
+		}
+		case 11:
+			Sort(a, n);
+			XuatMang(a, n);
+			break;
+		case 12:
+		{
+			int x = 0;
+			int SoLan = TimSoLanXuatHien(a, n, x);
+			cout << "\n\t Phan tu có so lan xuat hien nhieu nhat: " << x;
+			cout << "\n\t So lan xuat hien la: " << SoLan;
+			break;
+		}
+		case 13:
+		{
+			XuatMang(a, n);
+			int vitri, x;
+			cout << "\n\t Nhap gia tri can them vao mang: ";
+			cin >> x;
+			cout << "\t Nhap vi tri can them vao mang: ";
+			cin >> vitri;
+			bool kq = Them1PhanTu(a, n, x, vitri);
+			if (kq == true)
+				cout << "\t Them thanh cong ";
+			else
+				cout << "\t Vi tri them khong hop li \n";
+			break;
+		}
+		case 14:
+		{
+			XuatMang(a, n);
+			int vt;
+			cout << "\n\t Nhap vi tri cua mang can xoa : ";	cin >> vt;
+			bool kq = Xoa1PhanTu(a, n, vt);
+			if (kq == true)
+				cout << "\t Xoa thanh cong ";
+			else
+				cout << "\t Vi tri them khong hop li \n";
+			break;
+		}
+		case 15:
+			XoaSoAm(a, n);
+			XuatMang(a, n);
+			break;
+		case 16:
+		{
+			XuatMang(a, n);
+			int vitri, x;
+			cout << "\n\t Nhap gia tri can sua trong mang: ";
+			cin >> x;
+			cout << "\t Nhap vi tri cua mang can sua: ";
+			cin >> vitri;
+			bool kq = Sua1PhanTu(a, n, x, vitri);
+			if (kq == true)
+				cout << "\t Sua thanh cong ";
+			else
+				cout << "\t Vi tri them khong hop li \n";
+			break;
+		}
+		case 17:
+		{
+			int m = 0, p = 0;
+			cout << "\n\t Nhap mang moi: ";
+			NhapMang(b, m); // Nhap mang b voi so phan tu là m // mang a voi so phan tu n ð? nhap ? bài 1 hoac bài 20
+			GopMang(a, n, b, m, c, p); // Mang moi c voi so phan tu là p
+			// xu?t 3 m?ng ra ki?m tra
+			XuatMang(a, n);
+			XuatMang(b, m);
+			XuatMang(c, p);
+			break;
+		}
+		case 18:
+		{
+			int m = 0, p = 0;
+			// Mang b voi so phan tu là m - mang c voi so phan tu p
+			TachMangDuongAm(a, n, b, m, c, p); // Mang moi c voi so phan tu là p								
+			cout << "\n\t Mang cac so > 0 la: ";
+			XuatMang(b, m);
+			cout << "\n\t Mang cac so con lai la: ";
+			XuatMang(c, p);
+			break;
+		}
+		case 19:
+			XuatMang(a, n);
+			SortDuongAmKhong(a, n);
+			XuatMang(a, n);
+			break;
+		case 20:
+			AutoArray(a, range_min, range_max, n);
+			break;	
+
+		default:
+			return 0; // Nh?p phím b?t k? ngoài 1 --> 20  THOAT CHUONG TRINH
+		}
+		cout << "\n\n Nhan phim Esc thoat; Phím bat ki tiep tuc...! ";
+		// Nhan ki tu tu bàn phím KHoNG can Enter
+		ch = _getche();
+
+	} while (ch != 27);  // 27 là giá tri trong ASCCI cua phím ESC	
+
+	return 0;
+}
+
