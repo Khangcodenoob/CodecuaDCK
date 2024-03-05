@@ -1,0 +1,222 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8A8B9B36-E545-406C-80C7-89813EB11A17}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>DetaiQUANLYVEXELUA</RootNamespace>
+    <AssemblyName>DetaiQUANLYVEXELUA</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ChuyenTau.cs" />
+    <Compile Include="Datve.cs" />
+    <Compile Include="frmdatvetau.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmdatvetau.Designer.cs">
+      <DependentUpon>frmdatvetau.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmChuyenTau.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmChuyenTau.Designer.cs">
+      <DependentUpon>FrmChuyenTau.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmKhachhangg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmKhachhangg.Designer.cs">
+      <DependentUpon>frmKhachhangg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmView.Designer.cs">
+      <DependentUpon>frmView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Giaodienchinh.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Giaodienchinh.Designer.cs">
+      <DependentUpon>Giaodienchinh.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLogin.Designer.cs">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="frmQuydinh.resx">
+      <DependentUpon>frmQuydinh.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Chuyentau.csv" />
+    <None Include="datvetau.csv" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Khachhang.cs" />
+    <Compile Include="frmQuydinh.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmQuydinh.Designer.cs">
+      <DependentUpon>frmQuydinh.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="FrmChuyenTau.resx">
+      <DependentUpon>FrmChuyenTau.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmdatvetau.resx">
+      <DependentUpon>frmdatvetau.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmKhachhangg.resx">
+      <DependentUpon>frmKhachhangg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmView.resx">
+      <DependentUpon>frmView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Giaodienchinh.resx">
+      <DependentUpon>Giaodienchinh.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLogin.resx">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Include="ListKhachhang.csv" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cannha.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\train-coast-vietnam-lonelyplanet-2dc1c3307508-1606279657.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1000-1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bien-hoa-20230320111349661.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\20201203_172212.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hinh-anh-la-co-viet-nam-4-24-16-24-46.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\train-coast-vietnam-lonelyplanet-2dc1c3307508-16062796571.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\6545ef6867f225ebacaed2eb60b4343a.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bullet_train_48px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\two_tickets_48px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\people_48px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add_100px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add_100px1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\no_smoking_48px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\megaphone_26px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add_100px2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\save_100px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\delete_100px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\loudspeaker_64px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\loudspeaker_64px1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_megaphone_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_eric_cartman_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\color.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1000-11.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Computer-Science-2048x1365.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\z4288914352184_974b3faa76b80dd71583e80d34ef2ed9.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
