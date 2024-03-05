@@ -1,0 +1,82 @@
+package baitapjava2;
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
+
+class Student {
+    String mssv;
+    String hoTen;
+    int namSinh;
+    String gioiTinh;
+    String queQuan;
+    String cccd;
+    String truong;
+
+    public Student(String mssv, String hoTen, int namSinh, String gioiTinh, String queQuan, String cccd, String truong) {
+        this.mssv = mssv;
+        this.hoTen = hoTen;
+        this.namSinh = namSinh;
+        this.gioiTinh = gioiTinh;
+        this.queQuan = queQuan;
+        this.cccd = cccd;
+        this.truong = truong;
+    }
+
+    public void inThongTin() {
+        System.out.println("MSSV: " + mssv);
+        System.out.println("Họ và tên: " + hoTen);
+        System.out.println("Năm sinh: " + namSinh);
+        System.out.println("Giới tính: " + gioiTinh);
+        System.out.println("Quê quán: " + queQuan);
+        System.out.println("CCCD: " + cccd);
+        System.out.println("Sinh viên trường: " + truong);
+    }
+
+    public void xuatRaFile(String tenFile) {
+        try {
+            FileWriter fileWriter = new FileWriter(tenFile, true);
+            fileWriter.write("MSSV: " + mssv + "\n");
+            fileWriter.write("Họ và tên: " + hoTen + "\n");
+            fileWriter.write("Năm sinh: " + namSinh + "\n");
+            fileWriter.write("Giới tính: " + gioiTinh + "\n");
+            fileWriter.write("Quê quán: " + queQuan + "\n");
+            fileWriter.write("CCCD: " + cccd + "\n");
+            fileWriter.write("Sinh viên trường: " + truong + "\n\n");
+            fileWriter.close();
+            System.out.println("Đã xuất thông tin sinh viên vào file " + tenFile);
+        } catch (IOException e) {
+            System.out.println("Xuất ra file thất bại: " + e.getMessage());
+        }
+    }
+}
+    public class bai1 {
+        private static Scanner scanner = new Scanner(System.in);
+        public static void main(String[] args) {
+            
+            System.out.println("Nhập thông tin sinh viên:");
+            System.out.print("MSSV: ");
+            String mssv = scanner.nextLine();
+            System.out.print("Họ và tên: ");
+            String hoTen = scanner.nextLine();
+            System.out.print("Năm sinh: ");
+            int namSinh = scanner.nextInt();
+            scanner.nextLine(); // consume newline character
+            System.out.print("Giới tính: ");
+            String gioiTinh = scanner.nextLine();
+            System.out.print("Quê quán: ");
+            String queQuan = scanner.nextLine();
+            System.out.print("CCCD: ");
+            String cccd = scanner.nextLine();
+            System.out.print("Sinh viên trường: ");
+            String truong = scanner.nextLine();
+    
+            Student sinhVien = new Student(mssv, hoTen, namSinh, gioiTinh, queQuan, cccd, truong);
+    
+            System.out.println("\n--- Thông tin sinh viên ---");
+            sinhVien.inThongTin();
+    
+            String tenFile = "thong_tin_sinh_vien.txt";
+            sinhVien.xuatRaFile(tenFile);
+        }
+}
