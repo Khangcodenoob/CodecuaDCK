@@ -1,0 +1,40 @@
+package baitapjava2;
+
+import java.util.Scanner;
+
+public class bai2 {
+    private static Scanner scanner = new Scanner(System.in);
+      public static void main(String[] args) {
+        
+        // Nhập năm và số ngày trong tháng
+        System.out.print("Nhap nam: ");
+        int nam = scanner.nextInt();
+        System.out.print("Nhap so ngay trong thang: ");
+        int soNgayTrongThang = scanner.nextInt();
+
+        // In ra tháng tương ứng
+        System.out.println("\nThang tuong ung:");
+        switch (soNgayTrongThang) {
+            case 31:
+                System.out.println("Thang 1, 3, 5, 7, 8, 10, 12");
+                break;
+            case 30:
+                System.out.println("Thang 4, 6, 9, 11");
+                break;
+            case 28:
+                if (nam % 400 == 0 || (nam % 4 == 0 && nam % 100 != 0))
+                    System.out.println("Thang 2 co 29 ngay (nam nhuan)");
+                else
+                    System.out.println("Thang 2 co 28 ngay (khong phai nam nhuan)");
+                break;
+            case 29:
+                if (nam % 400 == 0 || (nam % 4 == 0 && nam % 100 != 0))
+                    System.out.println("Thang 2 co 29 ngay (nam nhuan)");
+                else
+                    System.out.println("Thang 2 co 28 ngay (khong phai nam nhuan)");
+                break;
+            default:
+                System.out.println("So ngay khong hop le");
+        }
+    }
+}
